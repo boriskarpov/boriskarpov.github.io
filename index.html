@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Борис Карпов — Маркетолог | Привлечение клиентов и рост заявок</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f6f7f9;
+      --surface: #ffffff;
+      --text: #0e0f12;
+      --text-muted: #5a6070;
+      --border: #e6e8ee;
+      --tg: #0088cc;
+      --tg-dark: #006da3;
+      --accent-soft: rgba(0, 136, 204, 0.08);
+      --shadow-sm: 0 8px 24px rgba(14, 15, 18, 0.05);
+      --shadow-lg: 0 24px 60px rgba(14, 15, 18, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Manrope', sans-serif;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* 3D Canvas Background */
+    #bg-3d {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    main, header, footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(230, 232, 238, 0.7);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .header.scrolled {
+      box-shadow: 0 10px 30px rgba(14, 15, 18, 0.05);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--tg);
+      box-shadow: 0 0 0 4px rgba(0, 136, 204, 0.16);
+      animation: pulse-dot 2.4s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(0, 136, 204, 0.16); }
+      50% { box-shadow: 0 0 0 9px rgba(0, 136, 204, 0.04); }
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .nav a {
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 28px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, background 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-tg {
+      background: var(--tg);
+      color: #ffffff;
+      box-shadow: 0 12px 28px rgba(0, 136, 204, 0.28);
+    }
+
+    .btn-tg:hover {
+      background: var(--tg-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(0, 136, 204, 0.36);
+    }
+
+    .btn-tg::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.65s ease;
+    }
+
+    .btn-tg:hover::after {
+      left: 140%;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-sm {
+      padding: 11px 20px;
+      font-size: 14px;
+    }
+
+    .tg-icon {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 56px 0 84px;
+      min-height: calc(100vh - 76px);
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      border-radius: 100px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge span.live {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #16a34a;
+      box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.16);
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 4.8vw, 62px);
+      font-weight: 800;
+      margin-bottom: 22px;
+      color: var(--text);
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(120deg, #0088cc 0%, #2563eb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 44px;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    .metric-val {
+      font-family: 'Manrope', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .metric-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    /* 3D Hero Portrait Stage (Right Side) */
+    .hero-stage {
+      perspective: 1200px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .portrait-3d-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      aspect-ratio: 4 / 5;
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out;
+      will-change: transform;
+    }
+
+    .portrait-backdrop-plane {
+      position: absolute;
+      inset: 18px -18px -18px 18px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(0, 136, 204, 0.12), rgba(14, 15, 18, 0.05));
+      border: 1px solid rgba(0, 136, 204, 0.16);
+      transform: translateZ(-35px);
+      pointer-events: none;
+    }
+
+    .portrait-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #eceef2;
+      box-shadow: 0 32px 70px rgba(14, 15, 18, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      transform: translateZ(0);
+    }
+
+    .portrait-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .portrait-3d-wrap:hover .portrait-card img {
+      transform: scale(1.03);
+    }
+
+    .portrait-glare {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.32), transparent 60%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      mix-blend-mode: overlay;
+    }
+
+    .portrait-caption {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      padding: 14px 18px;
+      border-radius: 16px;
+      background: rgba(14, 15, 18, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .portrait-caption strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .portrait-caption span {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .portrait-caption-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 6px 10px;
+      border-radius: 100px;
+      background: var(--tg);
+      color: #fff;
+    }
+
+    /* 3D Floating Glass Cards around Portrait */
+    .float-3d-badge {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(230, 232, 238, 0.95);
+      border-radius: 18px;
+      padding: 14px 18px;
+      box-shadow: 0 18px 40px rgba(14, 15, 18, 0.12);
+      pointer-events: none;
+      transform-style: preserve-3d;
+    }
+
+    .badge-top-left {
+      top: 28px;
+      left: -34px;
+      transform: translateZ(55px);
+      animation: floatY 4.5s ease-in-out infinite;
+    }
+
+    .badge-mid-right {
+      top: 46%;
+      right: -32px;
+      transform: translateZ(70px);
+      animation: floatY 5.2s ease-in-out infinite reverse;
+    }
+
+    .float-3d-badge .f-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .float-3d-badge .f-val {
+      font-family: 'Manrope', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .float-3d-badge .f-pill {
+      font-size: 11px;
+      font-weight: 700;
+      color: #16a34a;
+      background: rgba(22, 163, 74, 0.12);
+      padding: 2px 7px;
+      border-radius: 100px;
+    }
+
+    /* Fallback photo loader if local file isn't next to HTML */
+    .photo-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 28px;
+      background: linear-gradient(145deg, #f3f5f8, #e6e9ef);
+      color: var(--text);
+      gap: 12px;
+    }
+
+    .photo-fallback.active {
+      display: flex;
+    }
+
+    .photo-fallback label {
+      padding: 10px 18px;
+      border-radius: 100px;
+      background: var(--text);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    @keyframes floatY {
+      0%, 100% { margin-top: 0px; }
+      50% { margin-top: -10px; }
+    }
+
+    /* Marquee */
+    .marquee-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.85);
+      padding: 22px 0;
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 44px;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .marquee-item::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--tg);
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Sections */
+    .section {
+      padding: 96px 0;
+    }
+
+    .section-soft {
+      background: rgba(246, 247, 249, 0.78);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 52px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--tg);
+      margin-bottom: 12px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(30px, 3.6vw, 44px);
+      font-weight: 800;
+      max-width: 620px;
+    }
+
+    .section-head p {
+      max-width: 400px;
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    /* 3D Tilt Cards Grid */
+    .cards-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .cards-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .tilt-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.18s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      will-change: transform;
+    }
+
+    .tilt-card:hover {
+      border-color: rgba(0, 136, 204, 0.35);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .tilt-inner {
+      transform: translateZ(26px);
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      font-size: 22px;
+      color: var(--tg);
+      font-weight: 800;
+      font-family: 'Manrope', sans-serif;
+      box-shadow: 0 8px 20px rgba(0, 136, 204, 0.08);
+    }
+
+    .tilt-card h3 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .tilt-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 22px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 100px;
+      background: var(--bg-soft);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* Case Cards */
+    .case-niche {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--tg);
+      margin-bottom: 10px;
+    }
+
+    .case-stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 14px;
+      background: var(--bg-soft);
+      margin: 20px 0;
+    }
+
+    .case-stat strong {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .case-stat span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .case-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--tg);
+      transition: gap 0.2s ease;
+    }
+
+    .case-link:hover {
+      gap: 10px;
+    }
+
+    /* Steps Process */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .step-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .step-num {
+      font-family: 'Manrope', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: rgba(0, 136, 204, 0.22);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .step-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .step-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* Interactive Telegram Consultation Box */
+    .cta-box-perspective {
+      perspective: 1400px;
+    }
+
+    .cta-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      padding: 56px;
+      box-shadow: 0 32px 80px rgba(14, 15, 18, 0.08);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 136, 204, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(28px, 3.4vw, 42px);
+      margin-bottom: 16px;
+    }
+
+    .cta-list {
+      list-style: none;
+      margin-top: 24px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .cta-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .cta-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--tg);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .tg-builder {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tg-builder-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .chip {
+      padding: 9px 14px;
+      border-radius: 100px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text);
+    }
+
+    .chip:hover {
+      border-color: var(--tg);
+    }
+
+    .chip.active {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .input-field:focus {
+      border-color: var(--tg);
+      box-shadow: 0 0 0 4px rgba(0, 136, 204, 0.12);
+    }
+
+    .tg-builder .btn-tg {
+      width: 100%;
+      padding: 17px 24px;
+      font-size: 16px;
+    }
+
+    .tg-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      background: #ffffff;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* Floating Telegram Button */
+    .fab-tg {
+      position: fixed;
+      right: 26px;
+      bottom: 26px;
+      z-index: 60;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 100px;
+      background: var(--tg);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: 0 16px 36px rgba(0, 136, 204, 0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .fab-tg:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 22px 44px rgba(0, 136, 204, 0.45);
+    }
+
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .hero {
+        padding: 40px 0 64px;
+      }
+      .portrait-3d-wrap {
+        max-width: 420px;
+      }
+      .cards-grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .cta-box {
+        grid-template-columns: 1fr;
+        padding: 36px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        display: none;
+      }
+      .cards-grid-4,
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-metrics {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .badge-top-left {
+        left: 10px;
+        top: 14px;
+      }
+      .badge-mid-right {
+        right: 10px;
+        top: auto;
+        bottom: 96px;
+      }
+      .cta-box {
+        padding: 24px;
+      }
+      .fab-tg span {
+        display: none;
+      }
+      .fab-tg {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Interactive 3D Wireframe Canvas on White Background -->
+  <canvas id="bg-3d" aria-hidden="true"></canvas>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <span class="logo-dot"></span>
+        БОРИС КАРПОВ
+      </a>
+
+      <nav class="nav">
+        <a href="#services">Услуги</a>
+        <a href="#cases">Кейсы</a>
+        <a href="#process">Этапы</a>
+        <a href="#consult">Консультация</a>
+      </nav>
+
+      <a href="#consult" class="btn btn-tg btn-sm js-tg-direct">
+        <svg class="tg-icon" viewBox="0 0 24 24"><path d="M21.9 4.2c.3-1.2-.5-1.7-1.5-1.3L2.8 9.7c-1.2.5-1.2 1.1-.2 1.4l4.5 1.4 10.5-6.6c.5-.3.9-.1.6.2l-8.5 7.7-.3 4.6c.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l2.7-14.2z"/></svg>
+        Обсудить проект
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero First Screen (Text Left, Photo Right in 3D Stage) -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content reveal visible">
+          <div class="hero-badge">
+            <span class="live"></span>
+            Маркетолог · Борис Карпов
+          </div>
+
+          <h1>
+            Привожу <span class="highlight">целевых клиентов</span>, а не просто клики и охваты
+          </h1>
+
+          <p class="hero-sub">
+            Выстраиваю предсказуемый поток заявок через Яндекс Директ, ВКонтакте и Авито. Работаю с цифрами, сильными офферами и окупаемостью каждого рубля в рекламе.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#consult" class="btn btn-tg js-magnetic">
+              <svg class="tg-icon" viewBox="0 0 24 24"><path d="M21.9 4.2c.3-1.2-.5-1.7-1.5-1.3L2.8 9.7c-1.2.5-1.2 1.1-.2 1.4l4.5 1.4 10.5-6.6c.5-.3.9-.1.6.2l-8.5 7.7-.3 4.6c.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l2.7-14.2z"/></svg>
+              Получить консультацию в Telegram
+            </a>
+            <a href="#cases" class="btn btn-outline">
+              Смотреть результаты
+            </a>
+          </div>
+
+          <div class="hero-metrics">
+            <div>
+              <div class="metric-val" data-count="320" data-suffix="%">0%</div>
+              <div class="metric-label">Средний ROMI в активных проектах</div>
+            </div>
+            <div>
+              <div class="metric-val" data-count="47" data-suffix="+">0+</div>
+              <div class="metric-label">Запущенных ниш по всей России</div>
+            </div>
+            <div>
+              <div class="metric-val" data-count="14" data-suffix=" дней">0 дней</div>
+              <div class="metric-label">До первых стабильных заявок</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Block: User Photo with 3D Parallax & Floating Glass Cards -->
+        <div class="hero-stage reveal visible">
+          <div class="portrait-3d-wrap" id="hero-3d">
+            <div class="portrait-backdrop-plane"></div>
+
+            <div class="portrait-card">
+              <img
+                id="boris-photo"
+                src="Городской портрет в чёрном свитшоте.png"
+                alt="Борис Карпов — маркетолог"
+              />
+              <div class="photo-fallback" id="photo-fallback">
+                <strong>Фото «Городской портрет в чёрном свитшоте.png»</strong>
+                <span style="font-size:13px; color:#5a6070;">Положите файл рядом с index.html или выберите фото вручную для предпросмотра:</span>
+                <label for="photo-picker">Выбрать фото</label>
+                <input type="file" id="photo-picker" accept="image/*" hidden />
+              </div>
+              <div class="portrait-glare" id="hero-glare"></div>
+
+              <div class="portrait-caption">
+                <div>
+                  <strong>Борис Карпов</strong>
+                  <span>Performance-маркетолог</span>
+                </div>
+                <span class="portrait-caption-tag">В работе</span>
+              </div>
+            </div>
+
+            <!-- Floating 3D Metric Cards -->
+            <div class="float-3d-badge badge-top-left">
+              <div class="f-title">Стоимость заявки</div>
+              <div class="f-val">
+                420 ₽
+                <span class="f-pill">-38%</span>
+              </div>
+            </div>
+
+            <div class="float-3d-badge badge-mid-right">
+              <div class="f-title">Конверсия в сделку</div>
+              <div class="f-val">
+                28.4%
+                <span class="f-pill">ROMI ↑</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ticker -->
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-item">Яндекс Директ</span>
+        <span class="marquee-item">VK Реклама</span>
+        <span class="marquee-item">Авито Реклама</span>
+        <span class="marquee-item">Сильные 4U-офферы</span>
+        <span class="marquee-item">Интеграция с Битрикс24</span>
+        <span class="marquee-item">Сквозная аналитика</span>
+        <span class="marquee-item">Медиапланирование</span>
+        <span class="marquee-item">Масштабирование заявок</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="marquee-item">Яндекс Директ</span>
+        <span class="marquee-item">VK Реклама</span>
+        <span class="marquee-item">Авито Реклама</span>
+        <span class="marquee-item">Сильные 4U-офферы</span>
+        <span class="marquee-item">Интеграция с Битрикс24</span>
+        <span class="marquee-item">Сквозная аналитика</span>
+        <span class="marquee-item">Медиапланирование</span>
+        <span class="marquee-item">Масштабирование заявок</span>
+      </div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Инструменты роста</span>
+            <h2>Как именно мы привлекаем клиентов в ваш бизнес</h2>
+          </div>
+          <p>Подбираю связку каналов под конкретную нишу и бюджет — без слива денег на нерабочие гипотезы.</p>
+        </div>
+
+        <div class="cards-grid-4">
+          <div class="tilt-card reveal js-tilt">
+            <div class="tilt-inner">
+              <div class="card-icon">Я</div>
+              <h3>Яндекс Директ</h3>
+              <p>Перехватываем горячий спрос на Поиске и дожимаем аудиторию в РСЯ. Полная проработка семантики, минус-слов и посадочных страниц.</p>
+              <div class="tag-list">
+                <span class="tag">Поиск & РСЯ</span>
+                <span class="tag">Ретаргетинг</span>
+                <span class="tag">Яндекс Метрика</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tilt-card reveal js-tilt">
+            <div class="tilt-inner">
+              <div class="card-icon">VK</div>
+              <h3>Таргет ВКонтакте</h3>
+              <p>Создаём цепляющие креативы и лид-формы под сегменты аудитории. Работаем на снижение стоимости заявки и прогрев через сообщения.</p>
+              <div class="tag-list">
+                <span class="tag">VK Реклама</span>
+                <span class="tag">Лид-формы</span>
+                <span class="tag">Квиз-воронки</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tilt-card reveal js-tilt">
+            <div class="tilt-inner">
+              <div class="card-icon">Ав</div>
+              <h3>Авито Реклама</h3>
+              <p>Выводим объявления в топ выдачи по регионам, упаковываем витрину и автоматизируем поток обращений от тёплых покупателей.</p>
+              <div class="tag-list">
+                <span class="tag">Стратегия продвижения</span>
+                <span class="tag">Упаковка профиля</span>
+                <span class="tag">Аналитика спроса</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tilt-card reveal js-tilt">
+            <div class="tilt-inner">
+              <div class="card-icon">360</div>
+              <h3>Офферы, аналитика и CRM</h3>
+              <p>Формулируем убойные предложения, связываем рекламные кабинеты с Битрикс24 и показываем реальную цену каждого клиента.</p>
+              <div class="tag-list">
+                <span class="tag">Формула 4U</span>
+                <span class="tag">Битрикс24</span>
+                <span class="tag">Прозрачный отчёт</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cases Section -->
+    <section class="section section-soft" id="cases">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Цифры и факты</span>
+            <h2>Результаты клиентов в разных нишах</h2>
+          </div>
+          <p>Реальный маркетинг измеряется не лайками, а стоимостью лида и деньгами в кассе.</p>
+        </div>
+
+        <div class="cards-grid-3">
+          <div class="tilt-card reveal js-tilt">
+            <div class="tilt-inner">
+              <div class="case-niche">Ремонт квартир под ключ</div>
+              <h3>Стабильный поток замеров через ВК и Яндекс</h3>
+              <p>Пересобрали оффер с расчётом сметы за 2 минуты и подключили лид-формы напрямую в CRM отдела продаж.</p>
+              <div class="case-stat-row">
+                <div class="case-stat">
+                  <strong>186</strong>
+                  <span>целевых заявок / мес</span>
+                </div>
+                <div class="case-stat">
+                  <strong>640 ₽</strong>
+                  <span>цена обращения</span>
+                </div>
+              </div>
+              <a href="#consult" class="case-link" data-niche="Ремонт и строительство">Хочу такой же результат →</a>
+            </div>
+          </div>
+
+          <div class="tilt-card reveal js-tilt">
+            <div class="tilt-inner">
+              <div class="case-niche">Глэмпинг и загородный отдых</div>
+              <h3>Загрузка домиков на 92% в несезон</h3>
+              <p>Запустили связку РСЯ + таргет ВКонтакте с сегментацией по поводам отдыха и ретаргетингом на бронь.</p>
+              <div class="case-stat-row">
+                <div class="case-stat">
+                  <strong>410%</strong>
+                  <span>окупаемость ROMI</span>
+                </div>
+                <div class="case-stat">
+                  <strong>390 ₽</strong>
+                  <span>стоимость лида</span>
+                </div>
+              </div>
+              <a href="#consult" class="case-link" data-niche="Туризм / Глэмпинг">Хочу такой же результат →</a>
+            </div>
+          </div>
+
+          <div class="tilt-card reveal js-tilt">
+            <div class="tilt-inner">
+              <div class="case-niche">Ритейл и электроника</div>
+              <h3>Масштабирование продаж флагманов</h3>
+              <p>Обновили рекламные баннеры и торговые кампании, подключили Авито и увеличили объём заказов без роста ДРР.</p>
+              <div class="case-stat-row">
+                <div class="case-stat">
+                  <strong>×2.8</strong>
+                  <span>рост выручки</span>
+                </div>
+                <div class="case-stat">
+                  <strong>7.4%</strong>
+                  <span>доля рекламных расходов</span>
+                </div>
+              </div>
+              <a href="#consult" class="case-link" data-niche="Продажи и ритейл">Хочу такой же результат →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Порядок работы</span>
+            <h2>От разбора до первых заявок за 4 шага</h2>
+          </div>
+          <p>Чёткий медиаплан, понятные сроки и регулярная отчётность прямо в Telegram.</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card reveal">
+            <div class="step-num">01</div>
+            <h3>Бесплатный разбор</h3>
+            <p>В Telegram изучаем ваш проект, текущую рекламу, конкурентов и считаем потенциал по заявкам.</p>
+          </div>
+          <div class="step-card reveal">
+            <div class="step-num">02</div>
+            <h3>Стратегия и офферы</h3>
+            <p>Готовим медиаплан, сильные предложения и креативы под каждую группу целевой аудитории.</p>
+          </div>
+          <div class="step-card reveal">
+            <div class="step-num">03</div>
+            <h3>Запуск и аналитика</h3>
+            <p>Настраиваем кампании, цели и передачу лидов в вашу CRM, чтобы не терялась ни одна заявка.</p>
+          </div>
+          <div class="step-card reveal">
+            <div class="step-num">04</div>
+            <h3>Оптимизация</h3>
+            <p>Отключаем дорогие связки, масштабируем прибыльные и системно снижаем стоимость клиента.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consultation Telegram CTA Section -->
+    <section class="section" id="consult" style="padding-top: 24px;">
+      <div class="container cta-box-perspective">
+        <div class="cta-box reveal">
+          <div>
+            <span class="eyebrow">Бесплатная консультация</span>
+            <h2>Разберём ваш проект и составим план привлечения клиентов</h2>
+            <p style="color: var(--text-muted); font-size: 16px;">
+              Без навязывания и сложных терминов. Напишите мне в Telegram — за 20 минут покажу точки роста и спрогнозирую стоимость заявки в вашей нише.
+            </p>
+            <ul class="cta-list">
+              <li><span class="cta-check">✓</span> Аудит текущей рекламы или сайта</li>
+              <li><span class="cta-check">✓</span> Подбор оптимальных каналов (Яндекс, ВК, Авито)</li>
+              <li><span class="cta-check">✓</span> Понятный расчёт бюджета и прогноз заявок</li>
+            </ul>
+          </div>
+
+          <form class="tg-builder" id="tg-form">
+            <span class="tg-builder-label">1. Что сейчас актуально для вас?</span>
+            <div class="chip-group" id="goal-chips">
+              <button type="button" class="chip active" data-value="Нужны новые клиенты">Нужны клиенты</button>
+              <button type="button" class="chip" data-value="Снизить цену заявки">Снизить цену лида</button>
+              <button type="button" class="chip" data-value="Аудит текущей рекламы">Аудит рекламы</button>
+              <button type="button" class="chip" data-value="Запуск с нуля">Запуск с нуля</button>
+            </div>
+
+            <label class="tg-builder-label" for="client-niche">2. Ваша ниша и город</label>
+            <input
+              type="text"
+              id="client-niche"
+              class="input-field"
+              placeholder="Например: ремонт квартир, Санкт-Петербург"
+            />
+
+            <label class="tg-builder-label" for="client-name">3. Как к вам обращаться?</label>
+            <input
+              type="text"
+              id="client-name"
+              class="input-field"
+              placeholder="Ваше имя"
+            />
+
+            <button type="submit" class="btn btn-tg js-magnetic">
+              <svg class="tg-icon" viewBox="0 0 24 24"><path d="M21.9 4.2c.3-1.2-.5-1.7-1.5-1.3L2.8 9.7c-1.2.5-1.2 1.1-.2 1.4l4.5 1.4 10.5-6.6c.5-.3.9-.1.6.2l-8.5 7.7-.3 4.6c.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l2.7-14.2z"/></svg>
+              Отправить заявку в Telegram
+            </button>
+            <p class="tg-note">Откроется чат с Борисом Карповым с уже готовым сообщением</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 Борис Карпов · Маркетолог по привлечению клиентов</div>
+      <div>
+        <a href="#consult" class="js-tg-direct" style="color: var(--tg); font-weight: 600;">Связаться в Telegram →</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Telegram CTA -->
+  <a href="#consult" class="fab-tg js-tg-direct" aria-label="Написать в Telegram">
+    <svg class="tg-icon" viewBox="0 0 24 24"><path d="M21.9 4.2c.3-1.2-.5-1.7-1.5-1.3L2.8 9.7c-1.2.5-1.2 1.1-.2 1.4l4.5 1.4 10.5-6.6c.5-.3.9-.1.6.2l-8.5 7.7-.3 4.6c.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l2.7-14.2z"/></svg>
+    <span>Написать в Telegram</span>
+  </a>
+
+  <script>
+    // === НАСТРОЙКА: УКАЖИТЕ ВАШ USERNAME В TELEGRAM (БЕЗ @) ===
+    const TELEGRAM_USERNAME = "boriskarpov";
+
+    // 1. Обработка фото (авто-подхват и ручной предпросмотр, если файл в другой папке)
+    const borisPhoto = document.getElementById("boris-photo");
+    const photoFallback = document.getElementById("photo-fallback");
+    const photoPicker = document.getElementById("photo-picker");
+
+    borisPhoto.addEventListener("error", () => {
+      borisPhoto.style.display = "none";
+      photoFallback.classList.add("active");
+    });
+
+    photoPicker.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        borisPhoto.src = ev.target.result;
+        borisPhoto.style.display = "block";
+        photoFallback.classList.remove("active");
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // 2. Интерактивный 3D-фон (вращающийся 3D-икосаэдр + парящие узлы на белом фоне)
+    (function init3DBackground() {
+      const canvas = document.getElementById("bg-3d");
+      const ctx = canvas.getContext("2d");
+      let width, height, dpr;
+      let mouseX = 0, mouseY = 0;
+      let targetMouseX = 0, targetMouseY = 0;
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      resize();
+      window.addEventListener("resize", resize);
+
+      window.addEventListener("mousemove", (e) => {
+        targetMouseX = (e.clientX / width - 0.5) * 2;
+        targetMouseY = (e.clientY / height - 0.5) * 2;
+      });
+
+      // Вершины 3D икосаэдра
+      const t = (1 + Math.sqrt(5)) / 2;
+      const rawVertices = [
+        [-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0],
+        [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
+        [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1]
+      ];
+      const edges = [];
+      for (let i = 0; i < rawVertices.length; i++) {
+        for (let j = i + 1; j < rawVertices.length; j++) {
+          const dx = rawVertices[i][0] - rawVertices[j][0];
+          const dy = rawVertices[i][1] - rawVertices[j][1];
+          const dz = rawVertices[i][2] - rawVertices[j][2];
+          const dist = Math.hypot(dx, dy, dz);
+          if (dist < 2.1) edges.push([i, j]);
+        }
+      }
+
+      // Парящие 3D-частицы
+      const particles = Array.from({ length: 28 }, () => ({
+        x: (Math.random() - 0.5) * 1400,
+        y: (Math.random() - 0.5) * 900,
+        z: Math.random() * 600 - 200,
+        r: Math.random() * 2.5 + 1.2,
+        speed: Math.random() * 0.35 + 0.15
+      }));
+
+      let angleX = 0.4;
+      let angleY = 0.2;
+
+      function rotate3D(x, y, z, ax, ay) {
+        // Rotate Y
+        let x1 = x * Math.cos(ay) - z * Math.sin(ay);
+        let z1 = x * Math.sin(ay) + z * Math.cos(ay);
+        // Rotate X
+        let y2 = y * Math.cos(ax) - z1 * Math.sin(ax);
+        let z2 = y * Math.sin(ax) + z1 * Math.cos(ax);
+        return { x: x1, y: y2, z: z2 };
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        mouseX += (targetMouseX - mouseX) * 0.05;
+        mouseY += (targetMouseY - mouseY) * 0.05;
+
+        angleY += 0.0032;
+        angleX += 0.0018;
+
+        const scrollOffset = window.scrollY * 0.15;
+        const centerX = width * 0.78 - mouseX * 30;
+        const centerY = height * 0.46 - scrollOffset * 0.4 - mouseY * 25;
+        const scale = Math.min(width, height) * 0.16;
+        const fov = 700;
+
+        // Рисуем 3D-икосаэдр
+        const projected = rawVertices.map(([vx, vy, vz]) => {
+          const rot = rotate3D(vx, vy, vz, angleX + mouseY * 0.35, angleY + mouseX * 0.35);
+          const perspective = fov / (fov + rot.z * scale + 350);
+          return {
+            x: centerX + rot.x * scale * perspective,
+            y: centerY + rot.y * scale * perspective,
+            z: rot.z
+          };
+        });
+
+        ctx.lineWidth = 1.1;
+        edges.forEach(([a, b]) => {
+          const p1 = projected[a];
+          const p2 = projected[b];
+          const depthAlpha = Math.max(0.03, Math.min(0.14, (p1.z + p2.z + 4) * 0.02));
+          ctx.strokeStyle = `rgba(0, 136, 204, ${depthAlpha})`;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        });
+
+        projected.forEach((p) => {
+          ctx.fillStyle = "rgba(0, 136, 204, 0.22)";
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 2.4, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Рисуем 3D-частицы
+        particles.forEach((pt) => {
+          pt.y -= pt.speed;
+          if (pt.y < -height * 0.65) pt.y = height * 0.65;
+          const pScale = fov / (fov + pt.z + 300);
+          const sx = width * 0.5 + (pt.x + mouseX * 45) * pScale;
+          const sy = height * 0.5 + (pt.y + mouseY * 35) * pScale;
+          const alpha = Math.max(0.05, Math.min(0.22, pScale * 0.16));
+          ctx.fillStyle = `rgba(14, 15, 18, ${alpha})`;
+          ctx.beginPath();
+          ctx.arc(sx, sy, pt.r * pScale, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+
+    // 3. 3D-наклон главного портрета + световой блик
+    const hero3d = document.getElementById("hero-3d");
+    const heroGlare = document.getElementById("hero-glare");
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+
+    if (hero3d && !isTouch) {
+      hero3d.addEventListener("mousemove", (e) => {
+        const rect = hero3d.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        const rotateY = (x - 0.5) * 16;
+        const rotateX = (0.5 - y) * 14;
+
+        hero3d.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        heroGlare.style.opacity = "1";
+        heroGlare.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(255,255,255,0.36), transparent 62%)`;
+      });
+
+      hero3d.addEventListener("mouseleave", () => {
+        hero3d.style.transform = "rotateX(0deg) rotateY(0deg)";
+        heroGlare.style.opacity = "0";
+      });
+    }
+
+    // 4. 3D-наклон карточек услуг и кейсов
+    if (!isTouch) {
+      document.querySelectorAll(".js-tilt").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width;
+          const y = (e.clientY - rect.top) / rect.height;
+          const rotateY = (x - 0.5) * 10;
+          const rotateX = (0.5 - y) * 10;
+          card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)";
+        });
+      });
+    }
+
+    // 5. Магнитный эффект для основных Telegram-кнопок
+    if (!isTouch) {
+      document.querySelectorAll(".js-magnetic").forEach((btn) => {
+        btn.addEventListener("mousemove", (e) => {
+          const rect = btn.getBoundingClientRect();
+          const dx = (e.clientX - rect.left - rect.width / 2) * 0.14;
+          const dy = (e.clientY - rect.top - rect.height / 2) * 0.14;
+          btn.style.transform = `translate(${dx}px, ${dy}px)`;
+        });
+        btn.addEventListener("mouseleave", () => {
+          btn.style.transform = "";
+        });
+      });
+    }
+
+    // 6. Появление блоков при скролле и анимация счётчиков
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+    // Анимация чисел в первом экране
+    document.querySelectorAll("[data-count]").forEach((el) => {
+      const target = Number(el.dataset.count);
+      const suffix = el.dataset.suffix || "";
+      const duration = 1200;
+      const start = performance.now();
+
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+
+    // Тень шапки при скролле
+    const header = document.getElementById("header");
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("scrolled", window.scrollY > 12);
+    });
+
+    // 7. Конструктор заявки в Telegram
+    let selectedGoal = "Нужны новые клиенты";
+    const chips = document.querySelectorAll("#goal-chips .chip");
+    const nicheInput = document.getElementById("client-niche");
+    const nameInput = document.getElementById("client-name");
+
+    chips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        chips.forEach((c) => c.classList.remove("active"));
+        chip.classList.add("active");
+        selectedGoal = chip.dataset.value;
+      });
+    });
+
+    // Подстановка ниши при клике по кейсу
+    document.querySelectorAll(".case-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (link.dataset.niche) {
+          nicheInput.value = link.dataset.niche;
+        }
+      });
+    });
+
+    // Отправка формы напрямую в Telegram с готовым текстом
+    document.getElementById("tg-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const niche = nicheInput.value.trim();
+      const name = nameInput.value.trim();
+
+      let message = `Привет, Борис! Хочу записаться на консультацию по маркетингу.\nЗадача: ${selectedGoal}`;
+      if (niche) message += `\nНиша / город: ${niche}`;
+      if (name) message += `\nМеня зовут: ${name}`;
+
+      const tgUrl = `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(message)}`;
+      window.open(tgUrl, "_blank", "noopener,noreferrer");
+    });
+
+    // Прямые кнопки Telegram
+    document.querySelectorAll(".js-tg-direct").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        if (btn.getAttribute("href") === "#consult") {
+          e.preventDefault();
+          const quickMsg = "Привет, Борис! Хочу обсудить привлечение клиентов и записаться на консультацию.";
+          window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(quickMsg)}`, "_blank", "noopener,noreferrer");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
